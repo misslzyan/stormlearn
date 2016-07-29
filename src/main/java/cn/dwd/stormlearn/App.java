@@ -8,6 +8,9 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        String body = "adsafd\\tadfafd";
+        for(String t : body.split("\\\\t")){
+        	System.out.println(t);
+        }
     }
 }
