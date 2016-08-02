@@ -2,12 +2,15 @@ package cn.dwd.stormlearn;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.IRichBolt;
 import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
+import org.apache.storm.tuple.Values;
 
 public class WordCounter implements  IRichBolt{
 	
@@ -22,30 +25,6 @@ public class WordCounter implements  IRichBolt{
 	}
 
 	public void execute(Tuple input) {
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
-		System.out.println("=WordCounter");
 		String str  = input.getString(0);
 		if(!counters.containsKey(str)){
 			counters.put(str, 1);
@@ -53,7 +32,10 @@ public class WordCounter implements  IRichBolt{
 			Integer c = counters.get(str)+1;
 			counters.put(str,c);
 		}
-		System.out.println(counters);
+		for(Entry<String,Integer> entry: counters.entrySet()){
+			collector.emit(input,new Values(entry.getKey(),entry.getValue()));
+		}
+		
 		collector.ack(input);
 		
 	}
@@ -95,7 +77,7 @@ public class WordCounter implements  IRichBolt{
 	}
 
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		// TODO Auto-generated method stub
+		declarer.declare(new Fields("word","num"));
 		
 	}
 
