@@ -28,9 +28,6 @@ public class ZookeeperTest {
 		final ZooKeeper zk = new ZooKeeper("192.168.197.129:2181",3000,new Watcher(){
 
 			public void process(WatchedEvent event) {
-				if(event.getPath()!=null){
-					
-				}
 				if(event.getState() == KeeperState.SyncConnected){
 					ZookeeperTest.latch.countDown();
 				}
@@ -40,9 +37,9 @@ public class ZookeeperTest {
 		JSONObject json = new JSONObject();
 		json.put("id", 2);
 		json.put("name", "zhangsna");
-		zk.create("/zk3", json.toJSONString().getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+//		zk.create("/zk3", json.toJSONString().getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 		
-		byte[] result = zk.getData("/zk3", true, stat);
+		byte[] result = zk.getData("/zk3", new ExecuteWatcher(zk), stat);
 		System.out.println(new String(result));
 		while(true){
 			Thread.sleep(5000);
