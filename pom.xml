@@ -28,5 +28,28 @@
 			<artifactId>storm-core</artifactId>
 			<version>1.0.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+		<!--<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.1.6.Final</version>
+		</dependency>-->
+
+		<!-- https://mvnrepository.com/artifact/com.ning/async-http-client -->
+		<dependency>
+			<groupId>org.asynchttpclient</groupId>
+			<artifactId>async-http-client</artifactId>
+			<version>2.0.32</version>
+		</dependency>
+
+		<!-- test jar -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+
 	</dependencies>
 </project>
